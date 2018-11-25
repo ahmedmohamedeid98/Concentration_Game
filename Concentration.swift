@@ -11,10 +11,10 @@ import Foundation
 class Concenteration
 {
     // Create Array Form Struct Card
-    var Cards = [Card]()
+    private(set) var Cards = [Card]()
     
     
-    var indexOfOneAndOnlyFaceUpCard : Int?{
+    private var indexOfOneAndOnlyFaceUpCard : Int?{
         get{
             var indexFounded : Int?
             for index in Cards.indices{
@@ -37,7 +37,7 @@ class Concenteration
         }
     }
     
-    
+    // this is cannot be priavte
     func ChoosCard(at index:Int){
         if !Cards[index].isMatched {
             if let matchCard = indexOfOneAndOnlyFaceUpCard , matchCard != index {
