@@ -12,27 +12,47 @@ class Concenteration
 {
     // Create Array Form Struct Card
     var Cards = [Card]()
-    var indexOfOneAndOnlyFaceUpCard : Int?
+    
+    
+    var indexOfOneAndOnlyFaceUpCard : Int?{
+        get{
+            var indexFounded : Int?
+            for index in Cards.indices{
+                if Cards[index].isFaceUp{
+                    if indexFounded == nil{
+                        indexFounded = index
+                    }else{
+                        return nil
+                    }
+                }
+            }
+            return indexFounded
+        }
+        set(newValue) {
+            for index in Cards.indices{
+                Cards[index].isFaceUp = (index == newValue)
+                print("index == new value : t/f : \(index==newValue)")
+            }
+            print("newValue = \(String(describing: newValue))")
+        }
+    }
+    
+    
     func ChoosCard(at index:Int){
         if !Cards[index].isMatched {
-            // check if cards matchs
             if let matchCard = indexOfOneAndOnlyFaceUpCard , matchCard != index {
                 if Cards[matchCard].identifier == Cards[index].identifier{
                     Cards[matchCard].isMatched = true
                     Cards[index].isMatched = true
                 }
                 Cards[index].isFaceUp = true
-                indexOfOneAndOnlyFaceUpCard = nil
             }else{
-            //either no matchs nor two cards faceUp
-            for FlipDownCard in Cards.indices{
-                Cards[FlipDownCard].isFaceUp = false
-            }
-            Cards[index].isFaceUp = true
             indexOfOneAndOnlyFaceUpCard = index
         }
     }
     }
+    
+    
     init(numberOfPairsOfCard:Int) {
         for _ in 1...numberOfPairsOfCard{
             let card = Card()
