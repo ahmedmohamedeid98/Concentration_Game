@@ -45,12 +45,16 @@ class ViewController: UIViewController {
             }
         }
     }
-    private var emojiChoice = ["👻","🍇","🍐","🍎","🍋","🌎","☀️","🍀","🦀","🐫","🦅","🐿","🥦"]
+    //Usage String of emoji insteade of Array
+    //private var emojiChoice = ["👻","🍇","🍐","🍎","🍋","🌎","☀️","🍀","🦀","🐫","🦅","🐿","🥦"]
+    private var emojiChoice = "👻🍇🍐🍎🍋🌎☀️🍀🦀🐫🦅🐿🥦" // String of emoji
+
     // Dic key is hashVlaue so, we must make Cars Class confirm Hashable Protocol
     private var emoji = [Card:String]()
     private func emoji(for card: Card) -> String{
         if emoji[card] == nil , emojiChoice.count > 0{
-            emoji[card] = emojiChoice.remove(at: emojiChoice.count.arc4random)
+            let randomStringIndex = emojiChoice.index(emojiChoice.startIndex, offsetBy: emojiChoice.count.arc4random)
+            emoji[card] = String(emojiChoice.remove(at: randomStringIndex))
         }
         return emoji[card] ?? "?"
     }
