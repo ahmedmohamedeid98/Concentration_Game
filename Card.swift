@@ -15,11 +15,17 @@ import Foundation
 // Why we don't add var emojin in card ?
 // ans: becouse it is a data and the model must not contain data
 // model id independent from view
-struct Card
+struct Card : Hashable
 {
+    var hashValue: Int { return identifier}
+    
+    static func == (lhs: Card, rhs: Card) -> Bool {
+        return (lhs.identifier == rhs.identifier)
+    }
+    
     var isFaceUp = false
     var isMatched = false
-    private(set) var identifier : Int
+    private var identifier : Int
     
     private static var uniqueIdentifier = 0
     

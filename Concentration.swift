@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Concenteration
+struct Concenteration
 {
     // Create Array Form Struct Card
     private(set) var Cards = [Card]()
@@ -23,7 +23,7 @@ class Concenteration
                         indexFounded = index
                     }else{
                         return nil
-                    }
+                    }	
                 }
             }
             return indexFounded
@@ -38,10 +38,11 @@ class Concenteration
     }
     
     // this is cannot be priavte
-    func ChoosCard(at index:Int){
+    mutating func ChoosCard(at index:Int){
+        assert(Cards.indices.contains(index), "Cards.indices not Conatain this index :\(index)")
         if !Cards[index].isMatched {
             if let matchCard = indexOfOneAndOnlyFaceUpCard , matchCard != index {
-                if Cards[matchCard].identifier == Cards[index].identifier{
+                if Cards[matchCard] == Cards[index]{
                     Cards[matchCard].isMatched = true
                     Cards[index].isMatched = true
                 }
@@ -54,6 +55,7 @@ class Concenteration
     
     
     init(numberOfPairsOfCard:Int) {
+        assert(numberOfPairsOfCard > 0, "you must pass at least one PairsOfCard")
         for _ in 1...numberOfPairsOfCard{
             let card = Card()
             Cards += [card , card]
