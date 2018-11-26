@@ -31,9 +31,9 @@ class Concenteration
         set(newValue) {
             for index in Cards.indices{
                 Cards[index].isFaceUp = (index == newValue)
-                print("index == new value : t/f : \(index==newValue)")
+                
             }
-            print("newValue = \(String(describing: newValue))")
+            
         }
     }
     

@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     var numberOfPairsOfCard:Int{
         return (CardButtons.count + 1)/2
     }
-    
+
     // read only
     private(set) var FlipCount = 0{didSet{FlipCountLable.text = "Flips :\(FlipCount)"}}
     
@@ -49,8 +49,7 @@ class ViewController: UIViewController {
     private var emoji = [Int:String]()
     private func emoji(for card: Card) -> String{
         if emoji[card.identifier] == nil , emojiChoice.count > 0{
-            let randomIndex = Int(arc4random_uniform(UInt32(emojiChoice.count)))
-            emoji[card.identifier] = emojiChoice.remove(at: randomIndex)
+            emoji[card.identifier] = emojiChoice.remove(at: emojiChoice.count.arc4random)
         }
         return emoji[card.identifier] ?? "?"
     }
@@ -64,5 +63,18 @@ class ViewController: UIViewController {
     //            return "?"
     //        }
 
+}
+// Extend Int to Have Var that make 5.arc4random == Int(arc4ranodme_uniform(UInt(emojiChoice.count)))
+
+extension Int{
+    var arc4random: Int{
+        if self > 0 {
+            return Int(arc4random_uniform(UInt32(self)))
+        }else if self < 0 {
+            return Int(arc4random_uniform(UInt32(abs(self))))
+        }else{
+            return 0
+        }
+    }
 }
 
