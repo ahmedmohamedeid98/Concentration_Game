@@ -16,11 +16,12 @@ struct Concenteration
     
     private var indexOfOneAndOnlyFaceUpCard : Int?{
         get{
+            /* Last Updata */
             return Cards.indices.filter {Cards[$0].isFaceUp}.onlyOneFaceUp
-            
+//          /* second updata */
 //            let onlyCardFaceUp = Cards.indices.filter {Cards[$0].isFaceUp}
 //            return onlyCardFaceUp.count == 1 ? onlyCardFaceUp.first : nil
-//
+//          /* First updata */
 //            var indexFounded : Int?
 //            for index in Cards.indices{
 //                if Cards[index].isFaceUp{
@@ -70,6 +71,9 @@ struct Concenteration
     }
 }
 
+// ex.
+// let ch = "hello".onlyoneFaceUp -> return nil
+// let ch = "h".onlyOneFaceUp -> return 'h'
 extension Collection {
     var onlyOneFaceUp : Element? {
         return count == 1 ? first : nil
